@@ -64,7 +64,7 @@ let PositionSizeBuilder = ($) => {
 	}
 
 	let calculatePositionSize = (data) => {
-		const {risk, entryPrice, stopLoss, leverage} = data;
+		const { risk, entryPrice, stopLoss, leverage } = data;
 
 		const priceDifference = (stopLoss > entryPrice) ? stopLoss - entryPrice : entryPrice - stopLoss;
 
@@ -74,7 +74,7 @@ let PositionSizeBuilder = ($) => {
 			data.positionSizeUSD = 0;
 
 		} else {
-			data.positionSizeUnit = Math.round(risk / Math.abs(priceDifference));
+			data.positionSizeUnit = risk / Math.abs(priceDifference);
 			data.positionSizeUSD = (data.positionSizeUnit * entryPrice).toFixed(2);
 		}
 
@@ -86,7 +86,7 @@ let PositionSizeBuilder = ($) => {
 
 	let render = () => {
 		const elementsToUpdate = {
-			positionSizeUnit: data.positionSizeUnit,
+			positionSizeUnit: Number(data.positionSizeUnit).toFixed(4),
 			positionSizeUSD: "$" + data.positionSizeUSD,
 			margin: "$" + data.margin
 		};
